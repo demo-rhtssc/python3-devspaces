@@ -5,6 +5,7 @@ COPY . /tmp/
 USER 0
 # Install any dependencies
 RUN \
+  ls -lR /tmp/ /var/run/secrets && \
   cp -v /tmp/ca.crt /etc/pki/ca-trust/source/anchors/  && \
   update-ca-trust && \
   curl http://cli-server.trusted-artifact-signer.svc.cluster.local:8080/clients/linux/cosign-amd64.gz | gunzip | dd of=/usr/local/bin/cosign && \
