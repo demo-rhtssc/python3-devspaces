@@ -1,15 +1,15 @@
 # Trusted Application Pipeline Software Template
 
-This application, **python3-devspaces**, was created from a Trusted Application Pipeline Software Template.
+This application, **devspaces-image**, was created from a Trusted Application Pipeline Software Template.
 
 The software templates create a new source and gitops deployment repositories with a sample source application. 
 
 ## Repositories
 
-The source code for your application can be found in [https://github.com/demo-rhtssc/python3-devspaces ](https://github.com/demo-rhtssc/python3-devspaces ).
+The source code for your application can be found in [https://github.com/demo-rhtssc/devspaces-image ](https://github.com/demo-rhtssc/devspaces-image ).
  
 The gitops repository, which contains the kubernetes manifests for the application can be found in 
-[https://github.com/demo-rhtssc/python3-devspaces-gitops ](https://github.com/demo-rhtssc/python3-devspaces-gitops ) 
+[https://github.com/demo-rhtssc/devspaces-image-gitops ](https://github.com/demo-rhtssc/devspaces-image-gitops ) 
 
 ## Application namespaces 
 
@@ -17,6 +17,6 @@ The default application will be found in the following namespaces. Applications 
 
 |  Namespace   |  Description   |  
 | -------- | -------- |   
-| **rhtap-app-development** | The default application during development. Every build will be deployed to this namespace for testing. | 
-| **rhtap-app-stage** | The staging namespace for this application. Promotion from development to stage is manual via an update to the [gitops repository](https://github.com/demo-rhtssc/python3-devspaces-gitops ) in the components/python3-devspaces/overlays/prod directory |  
-| **rhtap-app-prod** | The production namespace for this application. Promotion from stage to production is manual via an update to the [gitops repository](https://github.com/demo-rhtssc/python3-devspaces-gitops ) in the components/python3-devspaces/overlays/prod directory | 
+| **rhtap-app-devspaces-image-development** | The default application during development. Every build will be deployed to this namespace for testing. | 
+| **rhtap-app-devspaces-image-stage** | The staging namespace for this application. Promotion from development to stage is manual via an update to the [gitops repository](https://github.com/demo-rhtssc/devspaces-image-gitops ) in the components/devspaces-image/overlays/prod directory |  
+| **rhtap-app-devspaces-image-prod** | The production namespace for this application. Promotion from stage to production is manual via an update to the [gitops repository](https://github.com/demo-rhtssc/devspaces-image-gitops ) in the components/devspaces-image/overlays/prod directory | 

@@ -1,22 +1,12 @@
-FROM registry.access.redhat.com/ubi9/python-39:1-117.1684741281
+FROM registry.access.redhat.com/ubi9/python-312:latest
 
-# By default, listen on port 8081
-EXPOSE 8081/tcp
-ENV FLASK_PORT=8081
-
-# Set the working directory in the container
-WORKDIR /projects
-
-# Copy the content of the local src directory to the working directory
-COPY . .
-
+USER 0
 # Install any dependencies
 RUN \
-  if [ -f requirements.txt ]; \
-    then pip install -r requirements.txt; \
-  elif [ `ls -1q *.txt | wc -l` == 1 ]; \
-    then pip install -r *.txt; \
-  fi
+  cp -v /run/secrets/kubernetes.io/serviceaccount/ca.crt /etc/pki/ca-trust/source/anchors/  && \
+  update-ca-trust && \
+  curl http://cli-server.trusted-artifact-signer.svc.cluster.local:8080/clients/linux/cosign-amd64.gz | gunzip | dd of=/usr/local/bin/cosign && \
+  curl http://cli-server.trusted-artifact-signer.svc.cluster.local:8080/clients/linux/gitsign-amd64.gz | gunzip | dd of=/usr/local/bin/gitsign && \
+  chmod -v +x /usr/local/bin/*
 
-# Specify the command to run on container start
-CMD [ "python", "./app.py" ]
+USER 1001

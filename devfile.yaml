@@ -1,59 +1,26 @@
 schemaVersion: 2.2.0
 metadata:
-  name: python
+  name: devspaces-python3-image
   projectType: Python
-  displayName: Python - Trusted Application Pipeline
-  icon: https://raw.githubusercontent.com/devfile-samples/devfile-stack-icons/main/python.svg
-  description: Python is an interpreted,  object-oriented, high-level programming language with dynamic semantics. This sample demonstrates software supply chain security functionalty using an advanced continuous integration pipeline covering building, CVE scanning, security scanning, signatures, attestations, SLSA provenance and SBOM along with Gitops-based continuous deployment.
-  language: Python
-  version: 1.0.1
+  displayName: Universal Developer Image
+  icon: https://raw.githubusercontent.com/devfile/devfile-web/main/apps/landing-page/public/pwa-192x192.png
+  language: universal
+  version: 1.0.0
   provider: Red Hat
   tags:
-    - Python
-    - Pip
-    - Flask
     - sscs
     - sbom
     - acs
   supportUrl: https://github.com/devfile-samples/devfile-support#support-information
-  attributes:
-    alpha.dockerimage-port: 8081
 parent:
-  id: python
+  id: udi
   registryUrl: 'https://registry.devfile.io'
 components:
-  - name: image-build
-    image:
-      imageName: python-image:latest
-      dockerfile:
-        uri: docker/Dockerfile
-        buildContext: .
-        rootRequired: false
-  - name: kubernetes-deploy
-    attributes:
-      deployment/replicas: 1
-      deployment/cpuRequest: 10m
-      deployment/memoryRequest: 50Mi
-      deployment/container-port: 8081
-    kubernetes:
-      uri: deploy.yaml
-      endpoints:
-        - name: http-8081
-          targetPort: 8081
-          path: /
-          secure: true
-commands:
-  - id: build-image
-    apply:
-      component: image-build
-  - id: deployk8s
-    apply:
-      component: kubernetes-deploy
-  - id: deploy
-    composite:
-      commands:
-        - build-image
-        - deployk8s
-      group:
-        kind: deploy
-        isDefault: true
+  - name: tools
+    container:
+      image: quay.io/ccordoui-demo-rhtssc/python3-devspaces:latest
+      memoryLimit: 2G
+      memoryRequest: 256Mi
+      cpuRequest: 500m
+      cpuLimit: 2000m
+      mountSources: true
