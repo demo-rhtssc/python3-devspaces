@@ -15,12 +15,3 @@ metadata:
 parent:
   id: udi
   registryUrl: 'https://registry.devfile.io'
-components:
-  - name: tools
-    container:
-      image: quay.io/ccordoui-demo-rhtssc/python3-devspaces:latest
-      memoryLimit: 2G
-      memoryRequest: 256Mi
-      cpuRequest: 500m
-      cpuLimit: 2000m
-      mountSources: true
