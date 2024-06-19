@@ -1,6 +1,6 @@
 FROM registry.access.redhat.com/ubi9/python-312:latest
 
-COPY ca.crt /tmp
+COPY . /tmp/
 
 USER 0
 # Install any dependencies
